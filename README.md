@@ -42,5 +42,5 @@ Delegate methods:
 	- (void) interactionDidStarted;
 	- (void) interactionDidEnded;
 	
-	For an example of how to use AirSightResizeView, please see the included example project.
+For an example of how to use AirSightResizeView, please see the included example project.
 
