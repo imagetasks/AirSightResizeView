@@ -3,7 +3,7 @@ AirSightResizeView
 
 # [![AirSightResizeView](https://github.com/imagetasks/AirSightResizeView/blob/master/demo.gif?raw=true)](#)
 
-Selection view, similar to macOS Preview.app. Used by [Pixea - free image viewer for macOS](https://www.imagetasks.com/pixea/).
+Selection view, similar to macOS Preview.app. User-resizable, user-repositionable NSView subclass. Used by [Pixea - free image viewer for macOS](https://www.imagetasks.com/pixea/).
 
 
 
@@ -41,4 +41,6 @@ Delegate methods:
 	- (NSRect) selectionWillMove:(NSRect)selectedRect;
 	- (void) interactionDidStarted;
 	- (void) interactionDidEnded;
+	
+	For an example of how to use AirSightResizeView, please see the included example project.
 
