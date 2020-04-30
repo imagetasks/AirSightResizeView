@@ -221,7 +221,9 @@
      NSRect newRect = NSMakeRect(x, y, width, height);
      
      
-     if([self.delegate respondsToSelector:@selector(selectionDidChanged:)]) {
+     if([self.delegate respondsToSelector:@selector(selectionWillChange:resizeView:)]) {
+         newRect = [self.delegate selectionWillChange:newRect resizeView:self];
+     } else if([self.delegate respondsToSelector:@selector(selectionWillChange:)]) {
          newRect = [self.delegate selectionWillChange:newRect];
      }
      
@@ -254,15 +256,19 @@
         newRect.origin.y = _selectableFrame.origin.y + _selectableFrame.size.height - newRect.size.height;
     }
         
-    if([self.delegate respondsToSelector:@selector(selectionDidChanged:)]) {
+
+    if([self.delegate respondsToSelector:@selector(selectionWillChange:resizeView:)]) {
+        newRect = [self.delegate selectionWillChange:newRect resizeView:self];
+    } else if([self.delegate respondsToSelector:@selector(selectionWillChange:)]) {
         newRect = [self.delegate selectionWillChange:newRect];
     }
     
-        
-    
-    if([self.delegate respondsToSelector:@selector(selectionWillMove:)]) {
+    if([self.delegate respondsToSelector:@selector(selectionWillMove:resizeView:)]) {
+        newRect = [self.delegate selectionWillMove:newRect resizeView:self];
+    } else if([self.delegate respondsToSelector:@selector(selectionWillMove:)]) {
         newRect = [self.delegate selectionWillMove:newRect];
     }
+    
             
     [self selectionChanged: newRect];
          
@@ -430,7 +436,9 @@
 -(void)selectionChanged:(NSRect) newSelection{
     self.selectedFrame = NSMakeRect(newSelection.origin.x, newSelection.origin.y, newSelection.size.width, newSelection.size.height);
     if(self.delegate) {
-        if([self.delegate respondsToSelector:@selector(selectionDidChanged:)]) {
+        if([self.delegate respondsToSelector:@selector(selectionDidChanged:resizeView:)]) {
+            [self.delegate selectionDidChanged:self.selectedFrame resizeView:self];
+        } else if([self.delegate respondsToSelector:@selector(selectionDidChanged:)]) {
             [self.delegate selectionDidChanged:self.selectedFrame];
         }
     }
@@ -438,7 +446,9 @@
 
 - (void) interactionDidStarted{
     if(self.delegate) {
-        if([self.delegate respondsToSelector:@selector(interactionDidStarted)]) {
+        if([self.delegate respondsToSelector:@selector(interactionDidStarted:)]) {
+            [self.delegate interactionDidStarted:self];
+        } else if([self.delegate respondsToSelector:@selector(interactionDidStarted)]) {
             [self.delegate interactionDidStarted];
         }
     }
@@ -446,7 +456,9 @@
 
 - (void) interactionDidEnded{
     if(self.delegate) {
-        if([self.delegate respondsToSelector:@selector(interactionDidEnded)]) {
+        if([self.delegate respondsToSelector:@selector(interactionDidEnded:)]) {
+            [self.delegate interactionDidEnded:self];
+        } else if([self.delegate respondsToSelector:@selector(interactionDidEnded)]) {
             [self.delegate interactionDidEnded];
         }
     }

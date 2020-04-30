@@ -77,16 +77,20 @@
     
 }
 
-- (NSRect) selectionWillChange:(NSRect)selectedRect{
+- (NSRect) selectionWillChange:(NSRect)selectedRect resizeView:(AirSightResizeView *)resizeView{
     
     // apply snap to grid/pixels or other processing and return NSRect of processed selection
+    
+    NSLog(@"selectionWillChange on '%@' resize view", [resizeView identifier]);
     
     return selectedRect;
 }
 
-- (NSRect) selectionWillMove:(NSRect)selectedRect{
+- (NSRect) selectionWillMove:(NSRect)selectedRect resizeView:(AirSightResizeView *)resizeView{
 
     // apply snap to grid/pixels or other processing and return NSRect of processed selection
+    
+    NSLog(@"selectionWillMove on '%@' resize view", [resizeView identifier]);
     
     return selectedRect;
 }
@@ -95,14 +99,14 @@
     
     // user started resize or drag
     
-    NSLog(@"interactionDidStarted");
+    NSLog(@"interactionDidStarted on some resize view");
 }
 
 - (void) interactionDidEnded{
     
     // user ended resize or drag
     
-    NSLog(@"interactionDidEnded");
+    NSLog(@"interactionDidEnded on some resize view");
 }
 
 

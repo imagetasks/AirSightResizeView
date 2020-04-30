@@ -2,12 +2,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class AirSightResizeView;
+
 @protocol AirSightResizeViewDelegate <NSObject>
+@optional
 - (void) selectionDidChanged:(NSRect)selectedRect;
 - (NSRect) selectionWillChange:(NSRect)selectedRect;
 - (NSRect) selectionWillMove:(NSRect)selectedRect;
 - (void) interactionDidStarted;
 - (void) interactionDidEnded;
+- (void) selectionDidChanged:(NSRect)selectedRect resizeView: (AirSightResizeView *) resizeView;
+- (NSRect) selectionWillChange:(NSRect)selectedRect resizeView: (AirSightResizeView *) resizeView;
+- (NSRect) selectionWillMove:(NSRect)selectedRect resizeView: (AirSightResizeView *) resizeView;
+- (void) interactionDidStarted: (AirSightResizeView *) resizeView;
+- (void) interactionDidEnded: (AirSightResizeView *) resizeView;
 @end
 
 
